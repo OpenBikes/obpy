@@ -14,13 +14,3 @@ all: install
 .PHONY: install
 install:
 	pip3 install -r requirements.txt
-
-### Setup developpement environment
-.PHONY: dev
-dev:
-	cp config_dev.py config.py
-
-### Setup production environment
-.PHONY: prod
-prod:
-	cp config_prod.py config.py
