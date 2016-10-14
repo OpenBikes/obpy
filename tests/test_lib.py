@@ -48,6 +48,12 @@ def test_api_updates_all():
     assert response.status_code == 200
 
 
+def test_api_metrics():
+    ''' Check api_metrics works. '''
+    response = obapi.get_metrics()
+    assert response.status_code == 200
+
+
 def test_api_updates_valid_city():
     ''' Check api_updates handles valid city. '''
     response = obapi.get_updates(city_slug='toulouse')
@@ -89,6 +95,24 @@ def test_api_filtered_invalid_city():
         limit=1
     )
     assert response.status_code == 412
+
+
+def test_api_closest_city():
+    ''' Check api_closest_city works. '''
+    response = obapi.get_closest_city(
+        latitude='43.6',
+        longitude='1.4333'
+    )
+    assert response.status_code == 200
+
+
+def test_api_closest_station():
+    ''' Check api_closest_station works. '''
+    response = obapi.get_closest_city(
+        latitude='43.6',
+        longitude='1.4333'
+    )
+    assert response.status_code == 200
 
 
 def test_api_forecast_invalid_city():

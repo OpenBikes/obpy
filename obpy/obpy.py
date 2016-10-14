@@ -72,12 +72,12 @@ class OBPY():
             'desired_quantity': desired_quantity,
             'confidence': confidence,
         })
-        print(payload)
         return requests.post(url, json=payload)
 
-    # def get_closest_city(self, latitude, longitude):
-    #     url = '{BASE_URL}'.format(BASE_URL=self.OB_URL)
-    #     res = requests.get(url, params={
-    #         'latitude': latitude,
-    #         'longitude': longitude})
-    #     pass
+    def get_closest_city(self, latitude, longitude):
+        url = '{BASE_URL}/closest_city/{lat}/{lon}'.format(BASE_URL=self.OB_URL, lat=latitude, lon=longitude)
+        return requests.get(url)
+
+    def get_closest_station(self, latitude, longitude):
+        url = '{BASE_URL}/closest_station/{lat}/{lon}'.format(BASE_URL=self.OB_URL, lat=latitude, lon=longitude)
+        return requests.get(url)
