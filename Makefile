@@ -14,3 +14,8 @@ all: install
 .PHONY: install
 install:
 	pip3 install -r requirements.txt
+
+# Launch test suite
+.PHONY: test
+test:
+	pytest

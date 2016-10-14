@@ -54,6 +54,43 @@ def test_api_updates_valid_city():
     assert response.status_code == 200
 
 
+def test_api_filtered_without_forecasts():
+    ''' Check api_filtered_stations works without forecasts. '''
+    response = obapi.get_filtered_stations(
+        city_slug='toulouse',
+        latitude=43.6,
+        longitude=1.4333,
+        limit=1
+    )
+    assert response.status_code == 200
+
+
+def test_api_filtered_with_forecasts():
+    ''' Check api_filtered_stations works with forecasts. '''
+    response = obapi.get_filtered_stations(
+        city_slug='toulouse',
+        latitude=43.6,
+        longitude=1.4333,
+        limit=1,
+        kind='bikes',
+        mode='walking',
+        desired_quantity=1,
+        moment=(dt.datetime.now() + dt.timedelta(minutes=1)).timestamp()
+    )
+    assert response.status_code == 200
+
+
+def test_api_filtered_invalid_city():
+    ''' Check api_filtered_stations handles invalid city names. '''
+    response = obapi.get_filtered_stations(
+        city_slug='xyz',
+        latitude=43.6,
+        longitude=1.4333,
+        limit=1
+    )
+    assert response.status_code == 412
+
+
 def test_api_forecast_invalid_city():
     ''' Check api_forecast handles invalid city. '''
     response = obapi.get_forecast(
@@ -87,32 +124,6 @@ def test_api_forecast_invalid_kind():
     assert response.status_code == 400
 
 
-# def test_api_filtered_without_forecasts():
-#     ''' Check api_filtered_stations works without forecasts. '''
-#     response = obapi.get_filtered_stations(
-#         city_slug='toulouse',
-#         latitude=43.6,
-#         longitude=1.4333,
-#         limit=1
-#     )
-#     assert response.status_code == 200
-
-
-def test_api_filtered_with_forecasts():
-    ''' Check api_filtered_stations works with forecasts. '''
-    response = obapi.get_filtered_stations(
-        city_slug='toulouse',
-        latitude=43.6,
-        longitude=1.4333,
-        limit=1,
-        kind='bikes',
-        mode='walking',
-        desired_quantity=1,
-        moment=(dt.datetime.now() + dt.timedelta(minutes=1)).timestamp(),
-        confidence=1.0
-    )
-    assert response.status_code == 200
-
 # def test_api_forecast_bikes():
 #     ''' Check api_forecast can forecast bikes. '''
 #     response = obapi.get_forecast(
@@ -121,6 +132,7 @@ def test_api_filtered_with_forecasts():
 #         kind='bikes',
 #         moment=(dt.datetime.now() + dt.timedelta(minutes=1)).timestamp()
 #     )
+#     print(response.text)
 #     assert response.status_code == 200
 
 

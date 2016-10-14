@@ -1,7 +1,7 @@
 import requests
 from obpy import config
 
-from obpy.util import handle_connection
+from obpy.util import handle_connection, remove_none_values_from_dict
 
 
 class OBPY():
@@ -52,17 +52,17 @@ class OBPY():
 
     def get_forecast(self, city_slug, station_slug, kind, moment):
         url = '{BASE_URL}/forecast'.format(BASE_URL=self.OB_URL)
-        payload = {
+        payload = remove_none_values_from_dict({
             'city_slug': city_slug,
             'station_slug': station_slug,
             'kind': kind,
-            'moment': moment
-        }
+            'moment': moment,
+        })
         return requests.post(url, json=payload)
 
     def get_filtered_stations(self, city_slug=None, latitude=None, longitude=None, limit=None, kind=None, mode=None, moment=None, desired_quantity=None, confidence=None):
         url = '{BASE_URL}/filtered_stations'.format(BASE_URL=self.OB_URL)
-        payload = {
+        payload = remove_none_values_from_dict({
             'city_slug': city_slug,
             'latitude': latitude,
             'longitude': longitude,
@@ -71,7 +71,7 @@ class OBPY():
             'mode': mode,
             'desired_quantity': desired_quantity,
             'confidence': confidence,
-        }
+        })
         print(payload)
         return requests.post(url, json=payload)
 
