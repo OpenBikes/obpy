@@ -14,7 +14,7 @@ install:
 script:
   - make test
 
-after_succes:
+after_success:
   - coveralls
 
 notifications:
