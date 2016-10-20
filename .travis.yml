@@ -7,8 +7,9 @@ env:
   - PYTHONPATH=$PYTHONPATH:$PWD
 
 install:
-  - python setup.py -q install
   - pip install -r requirements.txt
+  - pip install -r dev-requirements.txt
+  - python setup.py -q install
 
 script:
   - make test
