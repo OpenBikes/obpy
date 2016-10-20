@@ -3,6 +3,8 @@
     --------------------------------
 """
 
+from obpy.obpy import *
+
 __project__ = 'obpy'
 __author__ = 'OpenBikes'
 __copyright__ = 'OpenBikes'
