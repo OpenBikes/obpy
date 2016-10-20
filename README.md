@@ -8,4 +8,3 @@
 
 Function | API Endpoint | Description
 -------------------------------------
-         |              | 

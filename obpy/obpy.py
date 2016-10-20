@@ -1,7 +1,7 @@
 import requests
 from obpy import config
 
-from obpy.util import handle_connection, remove_none_values_from_dict
+from obpy.util import remove_none_values_from_dict
 
 OB_URL = config.BASE_URL
 
