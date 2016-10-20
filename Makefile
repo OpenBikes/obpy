@@ -2,6 +2,7 @@
 
 ## Configuration
 
+PACKAGE    := "obpy"
 BUILD_TIME := $(shell date +%FT%T%z)
 PROJECT    := $(shell basename $(PWD))
 
@@ -18,4 +19,4 @@ install:
 # Launch test suite
 .PHONY: test
 test:
-	pytest
+	pytest --verbose --cov=$(PACKAGE) tests/
