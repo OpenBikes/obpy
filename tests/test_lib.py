@@ -1,60 +1,72 @@
 import pytest
+import sure
+
 import datetime as dt
+
 import obpy
 
 
 def test_api_geojson_valid_city():
     ''' Check api_geojson handles a valid city. '''
-    res = obpy.get_latest_geojson('toulouse')
-    assert res.status_code == 200
+    response = obpy.get_latest_geojson('toulouse')
+    response.status_code.should.be.an(int)
+    response.status_code.should.should.be.equal(200)
 
 
 def test_api_geojson_invalid_city():
     ''' Check api_geojson handles an invalid city. '''
-    res = obpy.get_latest_geojson('gnfkdgjldjls')
-    assert res.status_code == 412
+    response = obpy.get_latest_geojson('gnfkdgjldjls')
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(412)
 
 
 def test_api_countries_valid_parameters():
     ''' Check api_countries handles all valid parameters. '''
     response = obpy.get_countries(provider='jcdecaux')
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_providers_valid_parameters():
     ''' Check api_providers handles all valid parameters. '''
     response = obpy.get_providers(country='France')
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_cities_valid_parameters():
     ''' Check api_cities handles all valid parameters. '''
     response = obpy.get_cities(slug='toulouse', predictable=1, active=1, country='France', provider='jcdecaux')
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_stations_valid_parameters():
     ''' Check api_stations handles all valid parameters. '''
     response = obpy.get_stations(slug='00003-pomme', city_slug='toulouse')
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_updates_all():
     ''' Check api_updates works with no parameters. '''
     response = obpy.get_updates()
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_metrics():
     ''' Check api_metrics works. '''
     response = obpy.get_metrics()
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_updates_valid_city():
     ''' Check api_updates handles valid city. '''
     response = obpy.get_updates(city_slug='toulouse')
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_filtered_without_forecasts():
@@ -65,7 +77,8 @@ def test_api_filtered_without_forecasts():
         longitude=1.4333,
         limit=1
     )
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_filtered_with_forecasts():
@@ -80,7 +93,8 @@ def test_api_filtered_with_forecasts():
         desired_quantity=1,
         moment=(dt.datetime.now() + dt.timedelta(minutes=1)).timestamp()
     )
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_filtered_invalid_city():
@@ -91,7 +105,8 @@ def test_api_filtered_invalid_city():
         longitude=1.4333,
         limit=1
     )
-    assert response.status_code == 412
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(412)
 
 
 def test_api_closest_city():
@@ -100,7 +115,8 @@ def test_api_closest_city():
         latitude='43.6',
         longitude='1.4333'
     )
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_closest_station():
@@ -109,7 +125,8 @@ def test_api_closest_station():
         latitude='43.6',
         longitude='1.4333'
     )
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_forecast_invalid_city():
@@ -120,7 +137,8 @@ def test_api_forecast_invalid_city():
         kind='bikes',
         moment=(dt.datetime.now() + dt.timedelta(minutes=1)).timestamp()
     )
-    assert response.status_code == 412
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(412)
 
 
 def test_api_forecast_invalid_station():
@@ -131,7 +149,8 @@ def test_api_forecast_invalid_station():
         kind='bikes',
         moment=(dt.datetime.now() + dt.timedelta(minutes=1)).timestamp()
     )
-    assert response.status_code == 412
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(412)
 
 
 def test_api_forecast_invalid_kind():
@@ -142,7 +161,8 @@ def test_api_forecast_invalid_kind():
         kind='xyz',
         moment=(dt.datetime.now() + dt.timedelta(minutes=1)).timestamp()
     )
-    assert response.status_code == 400
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(400)
 
 
 def test_api_forecast_bikes():
@@ -153,8 +173,8 @@ def test_api_forecast_bikes():
         kind='bikes',
         moment=(dt.datetime.now() + dt.timedelta(minutes=1)).timestamp()
     )
-    print(response.text)
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
 
 
 def test_api_forecast_spaces():
@@ -165,4 +185,5 @@ def test_api_forecast_spaces():
         kind='spaces',
         moment=(dt.datetime.now() + dt.timedelta(minutes=1)).timestamp()
     )
-    assert response.status_code == 200
+    response.status_code.should.be.an(int)
+    response.status_code.should.be.equal(200)
