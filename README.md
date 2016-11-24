@@ -1,14 +1,24 @@
-# obpy 
-:snake: Python SDK for OpenBikes API
+<div align="center">
+  <img src="misc/obpy.png" alt="obpy_logo"/>
+</div>
 
-<p align="center">
-  <a href="https://travis-ci.org/OpenBikes/obpy">
+<br/>
+
+<div align="center">
+	<a href="https://travis-ci.org/OpenBikes/obpy">
     <img alt="Build Status" src="https://travis-ci.org/OpenBikes/obpy.svg?branch=master">
   </a>
   <a href="https://coveralls.io/github/OpenBikes/obpy?branch=master">
 	<img alt="Coverage Status" src="https://coveralls.io/repos/github/OpenBikes/obpy/badge.svg?branch=master">
   </a>
-</p>
+	<a href="https://opensource.org/licenses/MIT">
+	<img src="http://img.shields.io/:license-mit-ff69b4.svg?style=flat-square" alt="mit"/>
+	</a>
+</div>
+
+
+# `obpy`
+:snake: Python SDK for OpenBikes API
 
 ## Available functions
 
