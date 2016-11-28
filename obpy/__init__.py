@@ -6,7 +6,7 @@
 from obpy.obpy import *
 
 __project__ = 'obpy'
-__author__ = 'OpenBikes'
+__author__ = 'Axel Bellec'
 __copyright__ = 'OpenBikes'
 __licence__ = 'MIT'
-__version__ = '0.0.1'
+__version__ = '1.0.0'
