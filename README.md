@@ -5,20 +5,73 @@
 <br/>
 
 <div align="center">
+	<a href="https://badge.fury.io/py/obpy">
+		<img src="https://badge.fury.io/py/obpy.svg" alt="PyPI version" height="18">
+	</a>
 	<a href="https://travis-ci.org/OpenBikes/obpy">
-    <img alt="Build Status" src="https://travis-ci.org/OpenBikes/obpy.svg?branch=master">
-  </a>
-  <a href="https://coveralls.io/github/OpenBikes/obpy?branch=master">
-	<img alt="Coverage Status" src="https://coveralls.io/repos/github/OpenBikes/obpy/badge.svg?branch=master">
-  </a>
+    	<img alt="Build Status" src="https://travis-ci.org/OpenBikes/obpy.svg?branch=master">
+  	</a>
+    <a href="https://coveralls.io/github/OpenBikes/obpy?branch=master">
+		<img alt="Coverage Status" src="https://coveralls.io/repos/github/OpenBikes/obpy/badge.svg?branch=master">
+    </a>
 	<a href="https://opensource.org/licenses/MIT">
-	<img src="http://img.shields.io/:license-mit-ff69b4.svg?style=flat-square" alt="mit"/>
+		<img src="http://img.shields.io/:license-mit-ff69b4.svg?style=flat-square" alt="mit"/>
 	</a>
 </div>
 
 
 # `obpy`
 :snake: Python SDK for OpenBikes API
+
+## Sample usage
+
+__Getting the list of countries__
+
+```python
+>>> import obpy
+>>> countries = obpy.get_countries().json()
+>>> countries
+['Belgium', 'Croatia', 'France', 'Germany', 'Irlande', 'Japan', 'Latvia', 'Lithuania', 'Luxembourg', 'New Zealand', 'Norway', 'Poland', 'Slovenia', 'South Korea', 'Spain', 'Sweden', 'Turkey', 'UAE', 'UK', 'USA']
+```
+
+__Getting the closest station according to `lat/lon`__
+
+```python
+>>> import obpy
+>>> station = obpy.get_closest_station(43.592021, 1.446276).json()
+{'altitude': 148.0,
+ 'docks': 20,
+ 'latitude': 43.5906050822776,
+ 'longitude': 1.44517443093758,
+ 'name': '00103 - ST MICHEL ST CATHERINE',
+ 'slug': '00103-st-michel-st-catherine'}
+```
+
+__Making a forecast for a station at a certain moment__
+
+```python
+>>> forecast = obpy.get_forecast(city_slug='toulouse', station_slug='00103-st-michel-st-catherine', kind='bikes', moment=1480451171).json()
+>>> forecast
+{'moment': '2016-11-29T21:26:11', 'predicted': 11, 'kind': 'bikes', 'at': '2016-11-28T21:26:30.372014', 'expected_error': 4.04257073103125, 'station': {'longitude': 1.44517443093758, 'slug': '00103-st-michel-st-catherine', 'altitude': 148.0, 'name': '00103 - ST MICHEL ST CATHERINE', 'latitude': 43.5906050822776, 'docks': 20}}
+```
+
+__Getting the latest *geojson* for a city__
+
+```python
+>>> import obpy
+>>> geojson = obpy.get_latest_geojson('toulouse').json()
+>>> geojson['features'][0]
+{'geometry': {'coordinates': [1.441003598726198, 43.608951960496405],
+  'type': 'Point'},
+ 'properties': {'address': '2 RUE GATIEN ARNOULT',
+  'bikes': 11,
+  'name': '00055 - ST SERNIN G. ARNOULT',
+  'slug': '00055-st-sernin-g-arnoult',
+  'stands': 4,
+  'status': 'OPEN',
+  'update': '2016-11-28T21:32:07'},
+ 'type': 'Feature'}
+```
 
 ## Available functions
 
@@ -35,3 +88,21 @@
 | `get_filtered_stations` 	| `POST /filtered_stations`                                		| Return filtered stations.                                      	|
 | `get_closest_city`      	| `GET /closest_city/<float:latitude>/<float:longitude>`    	| Return the closest city for a given latitude and longitude.    	|
 | `get_closest_station`   	| `GET /closest_station/<float:latitude>/<float:longitude>` 	| Return the closest station for a given latitude and longitude. 	|
+
+## Installation
+
+### **1. PyPI**
+
+```sh
+$ pip install obpy
+```
+
+### **2. GitHub for the latest development version**
+
+```sh
+$ pip install git+https://github.com/openbikes/obpy
+```
+
+`obpy` has the following dependencies:
+
+- [`requests`](http://docs.python-requests.org/en/master/): simple HTTP library for Python
