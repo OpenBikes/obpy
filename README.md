@@ -14,7 +14,7 @@
     <a href="https://coveralls.io/github/OpenBikes/obpy?branch=master">
 		<img alt="Coverage Status" src="https://coveralls.io/repos/github/OpenBikes/obpy/badge.svg?branch=master">
     </a>
-    <a href="https://www.codacy.com/app/Axel-BellecOrganization/obpy_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenBikes/obpy&amp;utm_campaign=Badge_Grade">
+    <a href="https://www.codacy.com/app/Axel-BellecOrganization/obpy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenBikes/obpy&amp;utm_campaign=Badge_Grade">
     	<img src="https://api.codacy.com/project/badge/Grade/1e6a5c56b02d4955a4d87deb3f0538ff"/>
     </a>
 	<a href="https://opensource.org/licenses/MIT">
@@ -28,11 +28,16 @@
 
 ## Sample usage
 
+By default, each `obpy` method returns a `requests` object. So basically, if you call `obpy.get_countries()`, you will have access to the request status code. To get the JSON data returned by the __OpenBikes API__ (`http://api.openbikes.co`), call the method `.json()`.
+
+Here you can find a set of sample calls:
+
 __Getting the list of countries__
 
 ```python
 >>> import obpy
->>> countries = obpy.get_countries().json()
+>>> response = obpy.get_countries()
+>>> countries = response.json()
 >>> countries
 ['Belgium', 'Croatia', 'France', 'Germany', 'Irlande', 'Japan', 'Latvia', 'Lithuania', 'Luxembourg', 'New Zealand', 'Norway', 'Poland', 'Slovenia', 'South Korea', 'Spain', 'Sweden', 'Turkey', 'UAE', 'UK', 'USA']
 ```
@@ -41,7 +46,9 @@ __Getting the closest station according to `lat/lon`__
 
 ```python
 >>> import obpy
->>> station = obpy.get_closest_station(43.592021, 1.446276).json()
+>>> response = obpy.get_closest_station(43.592021, 1.446276)
+>>> station = response.json()
+>>> station
 {'altitude': 148.0,
  'docks': 20,
  'latitude': 43.5906050822776,
@@ -53,8 +60,9 @@ __Getting the closest station according to `lat/lon`__
 __Making a forecast for a station at a certain moment__
 
 ```python
->>> forecast = obpy.get_forecast(city_slug='toulouse', station_slug='00103-st-michel-st-catherine', kind='bikes', moment=1480451171).json()
->>> forecast
+>>> import obpy
+>>> response = obpy.get_forecast(city_slug='toulouse', station_slug='00103-st-michel-st-catherine', kind='bikes', moment=1480451171)
+>>> forecast = response.json()
 {'moment': '2016-11-29T21:26:11', 'predicted': 11, 'kind': 'bikes', 'at': '2016-11-28T21:26:30.372014', 'expected_error': 4.04257073103125, 'station': {'longitude': 1.44517443093758, 'slug': '00103-st-michel-st-catherine', 'altitude': 148.0, 'name': '00103 - ST MICHEL ST CATHERINE', 'latitude': 43.5906050822776, 'docks': 20}}
 ```
 
@@ -62,7 +70,8 @@ __Getting the latest *geojson* for a city__
 
 ```python
 >>> import obpy
->>> geojson = obpy.get_latest_geojson('toulouse').json()
+>>> response = obpy.get_latest_geojson('toulouse')
+>>> geojson = response.json()
 >>> geojson['features'][0]
 {'geometry': {'coordinates': [1.441003598726198, 43.608951960496405],
   'type': 'Point'},
