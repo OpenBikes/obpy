@@ -1,4 +1,3 @@
-import pytest
 import sure
 
 import datetime as dt
@@ -36,7 +35,8 @@ def test_api_providers_valid_parameters():
 
 def test_api_cities_valid_parameters():
     ''' Check api_cities handles all valid parameters. '''
-    response = obpy.get_cities(slug='toulouse', predictable=1, active=1, country='France', provider='jcdecaux')
+    response = obpy.get_cities(slug='toulouse', predictable=1, active=1,
+                               country='France', provider='jcdecaux')
     response.status_code.should.be.an(int)
     response.status_code.should.be.equal(200)
 

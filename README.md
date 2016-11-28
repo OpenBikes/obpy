@@ -14,6 +14,9 @@
     <a href="https://coveralls.io/github/OpenBikes/obpy?branch=master">
 		<img alt="Coverage Status" src="https://coveralls.io/repos/github/OpenBikes/obpy/badge.svg?branch=master">
     </a>
+    <a href="https://www.codacy.com/app/Axel-BellecOrganization/obpy_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenBikes/obpy&amp;utm_campaign=Badge_Grade">
+    	<img src="https://api.codacy.com/project/badge/Grade/1e6a5c56b02d4955a4d87deb3f0538ff"/>
+    </a>
 	<a href="https://opensource.org/licenses/MIT">
 		<img src="http://img.shields.io/:license-mit-ff69b4.svg?style=flat-square" alt="mit"/>
 	</a>
