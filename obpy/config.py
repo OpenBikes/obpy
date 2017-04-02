@@ -1,1 +1,1 @@
-BASE_URL = 'http://api.openbikes.co'
+BASE_URL = 'https://api.openbikes.co'

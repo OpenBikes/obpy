@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 from obpy import __version__, __author__, __project__, __licence__
 
 README = 'README.md'
-REQUIREMENTS = ['requests==2.11.1']
+REQUIREMENTS = ['requests>=2.11.1']
 
 
 def long_description():

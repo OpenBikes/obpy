@@ -36,7 +36,8 @@ __Getting the list of countries__
 
 ```python
 >>> import obpy
->>> response = obpy.get_countries()
+>>> client = obpy.Obpy()
+>>> response = client.get_countries()
 >>> countries = response.json()
 >>> countries
 ['Belgium', 'Croatia', 'France', 'Germany', 'Irlande', 'Japan', 'Latvia', 'Lithuania', 'Luxembourg', 'New Zealand', 'Norway', 'Poland', 'Slovenia', 'South Korea', 'Spain', 'Sweden', 'Turkey', 'UAE', 'UK', 'USA']
@@ -46,7 +47,8 @@ __Getting the closest station according to `lat/lon`__
 
 ```python
 >>> import obpy
->>> response = obpy.get_closest_station(43.592021, 1.446276)
+>>> client = obpy.Obpy()
+>>> response = client.get_closest_station(43.592021, 1.446276)
 >>> station = response.json()
 >>> station
 {'altitude': 148.0,
@@ -61,7 +63,8 @@ __Making a forecast for a station at a certain moment__
 
 ```python
 >>> import obpy
->>> response = obpy.get_forecast(city_slug='toulouse', station_slug='00103-st-michel-st-catherine', kind='bikes', moment=1480451171)
+>>> client = obpy.Obpy()
+>>> response = client.get_forecast(city_slug='toulouse', station_slug='00103-st-michel-st-catherine', kind='bikes', moment=1480451171)
 >>> forecast = response.json()
 {'moment': '2016-11-29T21:26:11', 'predicted': 11, 'kind': 'bikes', 'at': '2016-11-28T21:26:30.372014', 'expected_error': 4.04257073103125, 'station': {'longitude': 1.44517443093758, 'slug': '00103-st-michel-st-catherine', 'altitude': 148.0, 'name': '00103 - ST MICHEL ST CATHERINE', 'latitude': 43.5906050822776, 'docks': 20}}
 ```
@@ -70,7 +73,8 @@ __Getting the latest *geojson* for a city__
 
 ```python
 >>> import obpy
->>> response = obpy.get_latest_geojson('toulouse')
+>>> client = obpy.Obpy()
+>>> response = client.get_latest_geojson('toulouse')
 >>> geojson = response.json()
 >>> geojson['features'][0]
 {'geometry': {'coordinates': [1.441003598726198, 43.608951960496405],
